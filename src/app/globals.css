@@ -72,6 +72,117 @@
   --font-display: "Outfit", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 
+  /* Stitch MCP Colors */
+  --color-primary: #0059b5;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #0071e3;
+  --color-on-primary-container: #fcfbff;
+  --color-secondary: #5e5e63;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #e0dfe4;
+  --color-on-secondary-container: #626267;
+  --color-tertiary: #5a5b5d;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #727476;
+  --color-on-tertiary-container: #fbfbfd;
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-background: #fcf8fb;
+  --color-on-background: #1b1b1d;
+  --color-surface: #fcf8fb;
+  --color-on-surface: #1b1b1d;
+  --color-surface-variant: #e4e2e4;
+  --color-on-surface-variant: #414753;
+  --color-outline: #717785;
+  --color-outline-variant: #c1c6d6;
+  --color-surface-bright: #fcf8fb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f6f3f5;
+  --color-surface-container: #f0edef;
+  --color-surface-container-high: #eae7ea;
+  --color-surface-container-highest: #e4e2e4;
+  
+  /* Additional Stitch Colors */
+  --color-on-secondary-fixed-variant: #46464b;
+  --color-inverse-surface: #303032;
+  --color-tertiary-fixed: #e2e2e4;
+  --color-primary-fixed-dim: #abc7ff;
+  --color-surface-dim: #dcd9dc;
+  --color-tertiary-fixed-dim: #c6c6c8;
+  --color-inverse-primary: #abc7ff;
+  --color-surface-tint: #005cbb;
+  --color-on-secondary-fixed: #1a1b1f;
+  --color-secondary-fixed: #e3e2e7;
+  --color-primary-fixed: #d7e2ff;
+  --color-inverse-on-surface: #f3f0f2;
+  --color-on-primary-fixed-variant: #00458f;
+  --color-on-tertiary-fixed-variant: #454749;
+  --color-on-tertiary-fixed: #1a1c1d;
+  --color-secondary-fixed-dim: #c7c6cb;
+  --color-on-primary-fixed: #001b3f;
+
+  /* Stitch Spacing */
+  --spacing-margin-mobile: 20px;
+  --spacing-margin-desktop: 64px;
+  --spacing-unit-xxl: 96px;
+  --spacing-unit-md: 16px;
+  --spacing-unit-xs: 4px;
+  --spacing-unit-sm: 8px;
+  --spacing-gutter: 24px;
+  --spacing-unit-xl: 48px;
+  --spacing-unit-lg: 24px;
+  --spacing-container-max: 1280px;
+
+  /* Stitch Font Sizes & Line Heights */
+  --text-display-lg: 64px;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 1.4;
+  --text-headline-md--font-weight: 600;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 1.2;
+  --text-label-sm--letter-spacing: 0.05em;
+  --text-label-sm--font-weight: 600;
+
+  --text-display-lg-mobile: 40px;
+  --text-display-lg-mobile--line-height: 1.2;
+  --text-display-lg-mobile--letter-spacing: -0.02em;
+  --text-display-lg-mobile--font-weight: 700;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.6;
+  --text-body-md--font-weight: 400;
+
+  --text-label-md: 14px;
+  --text-label-md--line-height: 1.2;
+  --text-label-md--letter-spacing: 0.01em;
+  --text-label-md--font-weight: 500;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 1.3;
+  --text-headline-lg--letter-spacing: -0.01em;
+  --text-headline-lg--font-weight: 600;
+
+  /* Stitch Font Families */
+  --font-display-lg: "Plus Jakarta Sans";
+  --font-headline-md: "Plus Jakarta Sans";
+  --font-label-sm: "Inter";
+  --font-display-lg-mobile: "Plus Jakarta Sans";
+  --font-body-lg: "Inter";
+  --font-body-md: "Inter";
+  --font-label-md: "Inter";
+  --font-headline-lg: "Plus Jakarta Sans";
+
   /* Shadows */
   --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.06);
   --shadow-glass-lg: 0 24px 80px rgba(0, 0, 0, 0.08);
@@ -371,4 +482,16 @@ body {
 
 .text-pretty {
   text-wrap: pretty;
+}
+
+/* --- Material Symbols & Scrolling (from Stitch) --- */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.filled-icon {
+  font-variation-settings: 'FILL' 1;
+}
+
+html {
+  scroll-behavior: smooth;
 }

@@ -1,229 +1,162 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { ShoppingCart, Minus, Plus, Trash2, ArrowRight, Tag, ShoppingBag } from "lucide-react";
-import { products } from "@/lib/seed-data";
-import { formatPrice } from "@/lib/utils";
-import type { CartItem } from "@/types/database";
-
-// Demo cart items
-const initialCart: CartItem[] = [
-  { product: products[0], quantity: 1 },  // ProBook X16
-  { product: products[14], quantity: 1 }, // AuraMax Pro
-];
+import { useRouter } from "next/navigation";
 
 export default function CartPage() {
-  const [cartItems, setCartItems] = useState<CartItem[]>(initialCart);
-  const [promoCode, setPromoCode] = useState("");
-  const [promoApplied, setPromoApplied] = useState(false);
-
-  const updateQuantity = (productId: string, delta: number) => {
-    setCartItems((prev) =>
-      prev
-        .map((item) =>
-          item.product.id === productId
-            ? { ...item, quantity: Math.max(0, item.quantity + delta) }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
-  };
-
-  const removeItem = (productId: string) => {
-    setCartItems((prev) => prev.filter((item) => item.product.id !== productId));
-  };
-
-  const subtotal = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
-  const discount = promoApplied ? Math.round(subtotal * 0.1) : 0;
-  const shipping = subtotal > 999 ? 0 : 99;
-  const total = subtotal - discount + shipping;
-
-  const handlePromo = () => {
-    if (promoCode.toLowerCase() === "technova10") {
-      setPromoApplied(true);
-    }
-  };
-
-  if (cartItems.length === 0) {
-    return (
-      <div className="min-h-screen bg-surface-primary flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center"
-        >
-          <ShoppingBag className="w-16 h-16 text-text-tertiary mx-auto mb-4" />
-          <h2 className="text-2xl font-display font-bold text-text-primary mb-2">Your cart is empty</h2>
-          <p className="text-text-secondary mb-6">Looks like you haven&apos;t added anything yet</p>
-          <Link
-            href="/shop"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl gradient-brand text-white font-medium"
-          >
-            Browse Shop <ArrowRight className="w-4 h-4" />
-          </Link>
-        </motion.div>
-      </div>
-    );
-  }
+  const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-surface-primary">
-      <div className="bg-surface-secondary border-b border-border-subtle">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <h1 className="text-3xl font-display font-bold text-text-primary flex items-center gap-3">
-            <ShoppingCart className="w-7 h-7 text-brand-500" />
-            Shopping Cart
-            <span className="text-lg text-text-tertiary font-normal">({cartItems.length} items)</span>
-          </h1>
-        </div>
+    <div className="font-body-md text-on-background bg-surface min-h-screen relative overflow-hidden pt-[104px]">
+      {/* Mock Background Content to show overlay */}
+      <div className="absolute inset-0 z-0 p-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter opacity-30 pointer-events-none">
+        <div className="bg-surface-container-high rounded-xl h-96"></div>
+        <div className="bg-surface-container-high rounded-xl h-96"></div>
+        <div className="bg-surface-container-high rounded-xl h-96"></div>
+        <div className="bg-surface-container-high rounded-xl h-96"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Cart Items */}
-          <div className="lg:col-span-2 space-y-4">
-            {cartItems.map((item, i) => {
-              const emoji =
-                item.product.category === "Laptops" ? "💻" :
-                item.product.category === "Phones" ? "📱" :
-                item.product.category === "Headphones" ? "🎧" : "⌚";
+      {/* Backdrop Overlay */}
+      <div 
+        className="fixed inset-0 bg-on-background/20 backdrop-blur-sm z-40 transition-opacity duration-300 cursor-pointer"
+        onClick={() => router.back()}
+      ></div>
 
-              return (
-                <motion.div
-                  key={item.product.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="card-elevated p-4 flex gap-4"
-                >
-                  <div className="w-24 h-24 rounded-xl bg-surface-tertiary flex items-center justify-center shrink-0">
-                    <span className="text-4xl">{emoji}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <p className="text-xs text-text-tertiary font-medium uppercase tracking-wider">
-                          {item.product.brand}
-                        </p>
-                        <Link
-                          href={`/product/${item.product.id}`}
-                          className="font-semibold text-text-primary hover:text-brand-600 transition-colors line-clamp-1"
-                        >
-                          {item.product.name}
-                        </Link>
-                      </div>
-                      <button
-                        onClick={() => removeItem(item.product.id)}
-                        className="p-2 rounded-lg text-text-tertiary hover:text-danger-500 hover:bg-danger-50 transition-all"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                    <div className="mt-3 flex items-center justify-between">
-                      <div className="flex items-center gap-1 border border-border-default rounded-lg">
-                        <button
-                          onClick={() => updateQuantity(item.product.id, -1)}
-                          className="p-2 text-text-tertiary hover:text-text-primary transition-colors"
-                        >
-                          <Minus className="w-4 h-4" />
-                        </button>
-                        <span className="w-8 text-center text-sm font-medium text-text-primary">
-                          {item.quantity}
-                        </span>
-                        <button
-                          onClick={() => updateQuantity(item.product.id, 1)}
-                          className="p-2 text-text-tertiary hover:text-text-primary transition-colors"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-bold text-text-primary">{formatPrice(item.product.price * item.quantity)}</p>
-                        {item.quantity > 1 && (
-                          <p className="text-xs text-text-tertiary">{formatPrice(item.product.price)} each</p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Order Summary */}
+      {/* Slide-out Cart Drawer */}
+      <aside className="fixed inset-y-0 right-0 w-full max-w-md z-[60] bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-2xl shadow-[0_20px_40px_rgba(0,0,0,0.04)] border-l border-surface-container-highest transition-transform duration-500 ease-in-out flex flex-col h-full">
+        {/* Header */}
+        <header className="flex items-center justify-between p-unit-lg border-b border-surface-container-highest/50">
           <div>
-            <div className="card-elevated p-6 sticky top-28">
-              <h2 className="font-semibold text-text-primary mb-4">Order Summary</h2>
+            <h2 className="font-headline-md text-headline-md text-on-surface">Shopping Cart</h2>
+            <p className="font-body-md text-body-md text-on-surface-variant mt-1">Your premium selection</p>
+          </div>
+          <button 
+            onClick={() => router.back()}
+            className="p-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant hover:text-on-surface group"
+          >
+            <span className="material-symbols-outlined text-[24px] group-hover:rotate-90 transition-transform duration-300">close</span>
+          </button>
+        </header>
 
-              {/* Promo Code */}
-              <div className="flex gap-2 mb-6">
-                <div className="relative flex-1">
-                  <Tag className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
-                  <input
-                    type="text"
-                    value={promoCode}
-                    onChange={(e) => setPromoCode(e.target.value)}
-                    placeholder="Promo code"
-                    className="w-full pl-9 pr-3 py-2.5 rounded-lg bg-surface-secondary border border-border-default focus:border-brand-500 outline-none text-sm"
-                    disabled={promoApplied}
-                  />
+        {/* Cart Items List */}
+        <div className="flex-1 overflow-y-auto cart-scroll p-unit-lg space-y-unit-lg">
+          {/* Item 1 */}
+          <div className="flex gap-unit-md items-start group">
+            <div className="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-low relative shrink-0">
+              <img className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" alt="AeroPhone Pro" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwyCOm1DF8QBSgEqcXNZ8LrhzhOLwVJ7o6Fj4aKj_EykvgDyW4w1xY20EtwE5XlkVAFKQ8Pr_GPSFweKvdkTjHdaRi1jB6SvNkiO32vVyx_83wJ3jD_CKeFQ5ZEmQvFIclAq7Z1JCEHo9zBUxnO4hJ21exe1xuAWH77o4yui90xEiL-l2YDzXjp8zcyJ5YIn24K57tV4Mvt6bzV4vXdoW8tJDJjLy1M_Lu8XND8kbgiEbC4mVpRjwGcw" />
+            </div>
+            <div className="flex-1 flex flex-col justify-between h-24">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="font-label-md text-label-md text-on-surface">AeroPhone Pro</h3>
+                  <p className="font-label-sm text-label-sm text-on-surface-variant mt-1">Matte Silver</p>
                 </div>
-                <button
-                  onClick={handlePromo}
-                  disabled={promoApplied || !promoCode}
-                  className="px-4 py-2.5 rounded-lg border border-brand-500 text-brand-600 text-sm font-medium hover:bg-brand-50 disabled:opacity-50 transition-all"
-                >
-                  {promoApplied ? "Applied ✓" : "Apply"}
+                <span className="font-label-md text-label-md text-on-surface">$299.00</span>
+              </div>
+              <div className="flex items-center justify-between mt-auto">
+                <div className="flex items-center border border-outline-variant rounded-full h-8 px-2 bg-surface">
+                  <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-6 h-6">
+                    <span className="material-symbols-outlined text-[16px]">remove</span>
+                  </button>
+                  <span className="font-label-md text-label-md w-8 text-center text-on-surface">1</span>
+                  <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-6 h-6">
+                    <span className="material-symbols-outlined text-[16px]">add</span>
+                  </button>
+                </div>
+                <button className="text-on-surface-variant hover:text-error transition-colors p-1">
+                  <span className="material-symbols-outlined text-[18px]">delete</span>
                 </button>
               </div>
-              {promoApplied && (
-                <p className="text-xs text-success-600 mb-4">🎉 TECHNOVA10: 10% discount applied!</p>
-              )}
+            </div>
+          </div>
 
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">Subtotal</span>
-                  <span className="text-text-primary font-medium">{formatPrice(subtotal)}</span>
+          {/* Item 2 */}
+          <div className="flex gap-unit-md items-start group">
+            <div className="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-low relative shrink-0">
+              <img className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" alt="Nova Watch Series 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD20fXY4-ATj-ejmm_dQ7mF-mVNQ3VVBi1itGuFtd3_dDWmRtVK_o7CmSsdJEyWei63UR0-QoBn0711Ei6f2QsdTM_69IQu_nbA7OU8Z6swqZP1u20GHGm8MeHkWaQeZW8PLI6p9Wj3uVDt0BqC1Ok26vvn_NNDqIX4Gof5MwNOTeaHsS6Zxh3oZIIbxHHgGVfo_HWMJNqPIzGo4UJiAh5CLZeChTIpD-q5HJqJ5tWC0ljqscNrOOly9w" />
+            </div>
+            <div className="flex-1 flex flex-col justify-between h-24">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="font-label-md text-label-md text-on-surface">Nova Watch Series 4</h3>
+                  <p className="font-label-sm text-label-sm text-on-surface-variant mt-1">Graphite</p>
                 </div>
-                {discount > 0 && (
-                  <div className="flex justify-between text-success-600">
-                    <span>Discount</span>
-                    <span>-{formatPrice(discount)}</span>
-                  </div>
-                )}
-                <div className="flex justify-between">
-                  <span className="text-text-secondary">Shipping</span>
-                  <span className="text-text-primary font-medium">
-                    {shipping === 0 ? (
-                      <span className="text-success-600">Free</span>
-                    ) : (
-                      formatPrice(shipping)
-                    )}
-                  </span>
-                </div>
-                <hr className="border-border-subtle" />
-                <div className="flex justify-between text-lg">
-                  <span className="font-semibold text-text-primary">Total</span>
-                  <span className="font-bold text-text-primary">{formatPrice(total)}</span>
-                </div>
+                <span className="font-label-md text-label-md text-on-surface">$450.00</span>
               </div>
+              <div className="flex items-center justify-between mt-auto">
+                <div className="flex items-center border border-outline-variant rounded-full h-8 px-2 bg-surface">
+                  <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-6 h-6">
+                    <span className="material-symbols-outlined text-[16px]">remove</span>
+                  </button>
+                  <span className="font-label-md text-label-md w-8 text-center text-on-surface">2</span>
+                  <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-6 h-6">
+                    <span className="material-symbols-outlined text-[16px]">add</span>
+                  </button>
+                </div>
+                <button className="text-on-surface-variant hover:text-error transition-colors p-1">
+                  <span className="material-symbols-outlined text-[18px]">delete</span>
+                </button>
+              </div>
+            </div>
+          </div>
 
-              <Link
-                href="/checkout"
-                className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl gradient-brand text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all"
-              >
-                Proceed to Checkout <ArrowRight className="w-4 h-4" />
-              </Link>
-
-              <p className="mt-4 text-xs text-text-tertiary text-center">
-                Try code <span className="font-mono font-semibold">TECHNOVA10</span> for 10% off
-              </p>
+          {/* Item 3 */}
+          <div className="flex gap-unit-md items-start group">
+            <div className="w-24 h-24 rounded-lg overflow-hidden bg-surface-container-low relative shrink-0">
+              <img className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500" alt="OmniCharge Pad" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALoniVEDrhee95FAezYg9EAGb9oTy2KNmo9OVdBs45GWtZaBt1QogJynCH1EbxAGY1vw8Vpx1oJ0peOa862Bxabl4Dec1nCAgsEE8nd6R8RqRkmmf98_edqYpZyOW4OzPv3BIT9PFR-yknR8q1vzaTaM1zo2D_pQlQ54_m94EggnFbQjS6n5BZWaBnsARwziPi-7cEWprFK3ZjNSej_xD3jCGEQN64FlzOvQ0RObWxReY3KCkJ26xOmw" />
+            </div>
+            <div className="flex-1 flex flex-col justify-between h-24">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="font-label-md text-label-md text-on-surface">OmniCharge Pad</h3>
+                  <p className="font-label-sm text-label-sm text-on-surface-variant mt-1">Ceramic White</p>
+                </div>
+                <span className="font-label-md text-label-md text-on-surface">$89.00</span>
+              </div>
+              <div className="flex items-center justify-between mt-auto">
+                <div className="flex items-center border border-outline-variant rounded-full h-8 px-2 bg-surface">
+                  <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-6 h-6">
+                    <span className="material-symbols-outlined text-[16px]">remove</span>
+                  </button>
+                  <span className="font-label-md text-label-md w-8 text-center text-on-surface">1</span>
+                  <button className="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center w-6 h-6">
+                    <span className="material-symbols-outlined text-[16px]">add</span>
+                  </button>
+                </div>
+                <button className="text-on-surface-variant hover:text-error transition-colors p-1">
+                  <span className="material-symbols-outlined text-[18px]">delete</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+
+        {/* Footer / Checkout Section */}
+        <div className="p-unit-lg bg-surface-container-low/50 backdrop-blur-md border-t border-surface-container-highest/50 mt-auto">
+          <div className="space-y-unit-sm mb-unit-lg">
+            <div className="flex justify-between font-body-md text-body-md text-on-surface-variant">
+              <span>Subtotal</span>
+              <span>$1,288.00</span>
+            </div>
+            <div className="flex justify-between font-body-md text-body-md text-on-surface-variant">
+              <span>Shipping</span>
+              <span>Calculated at checkout</span>
+            </div>
+            <div className="h-px w-full bg-outline-variant/30 my-unit-sm"></div>
+            <div className="flex justify-between items-center font-headline-md text-headline-md text-on-surface">
+              <span>Total</span>
+              <span>$1,288.00</span>
+            </div>
+          </div>
+          <Link href="/checkout" className="w-full bg-primary hover:bg-primary-container text-on-primary rounded-full py-4 font-label-md text-label-md tracking-wider transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 group">
+            Proceed to Checkout
+            <span className="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </Link>
+          <p className="font-label-sm text-label-sm text-center text-on-surface-variant mt-unit-md opacity-70">
+            Secure checkout powered by TechNova
+          </p>
+        </div>
+      </aside>
     </div>
   );
 }

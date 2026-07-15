@@ -15,9 +15,9 @@ export default function StorefrontLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col pt-20">
       <StorefrontNavbar />
-      <main className="flex-1 pt-24">{children}</main>
+      <div className="flex-1 w-full">{children}</div>
       <StorefrontFooter />
     </div>
   );
