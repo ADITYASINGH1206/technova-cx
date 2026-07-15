@@ -1,13 +1,40 @@
-import type { Metadata } from "next";
-import StorefrontNavbar from "@/components/storefront/Navbar";
-import StorefrontFooter from "@/components/storefront/Footer";
+import Link from "next/link";
+import React from "react";
 
-export const metadata: Metadata = {
-  title: {
-    default: "TechNova — Premium Electronics",
-    template: "%s | TechNova",
-  },
-};
+function StorefrontNavbar() {
+  return (
+    <nav className="fixed top-0 w-full z-50 glass-light border-b-0 rounded-b-2xl px-6 py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
+        <Link href="/" className="font-sans font-bold text-xl tracking-tight text-[var(--color-sf-primary)]">
+          TechNova
+        </Link>
+        <div className="hidden md:flex items-center gap-6 font-sans text-sm font-medium">
+          <Link href="/" className="hover:text-[var(--color-sf-primary)] transition-colors">Home</Link>
+          <Link href="/shop" className="hover:text-[var(--color-sf-primary)] transition-colors">Shop</Link>
+          <Link href="/support" className="hover:text-[var(--color-sf-primary)] transition-colors">Support</Link>
+        </div>
+        <div className="flex items-center gap-4">
+          <Link href="/cart" className="p-2 rounded-full hover:bg-[var(--color-sf-primary)]/10 transition-colors">
+            Cart
+          </Link>
+          <Link href="/admin/dashboard" className="p-2 rounded-full hover:bg-[var(--color-sf-primary)]/10 transition-colors text-xs opacity-70">
+            Admin
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
+function StorefrontFooter() {
+  return (
+    <footer className="mt-20 py-12 border-t border-[var(--color-sf-border)] bg-[var(--color-sf-background)]">
+      <div className="max-w-7xl mx-auto px-6 text-center text-sm opacity-60">
+        © 2024 TechNova. Powered by UI-UX Pro Max Design System.
+      </div>
+    </footer>
+  );
+}
 
 export default function StorefrontLayout({
   children,
@@ -15,9 +42,11 @@ export default function StorefrontLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col pt-20">
+    <div className="min-h-screen flex flex-col pt-24 bg-mesh-light relative">
       <StorefrontNavbar />
-      <div className="flex-1 w-full">{children}</div>
+      <main className="flex-1 w-full max-w-7xl mx-auto px-6">
+        {children}
+      </main>
       <StorefrontFooter />
     </div>
   );

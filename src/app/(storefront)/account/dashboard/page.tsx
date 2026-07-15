@@ -1,119 +1,86 @@
 "use client";
 
+import { GlassCard } from "@/components/ui/GlassCard";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { Package, ChevronRight, MessageCircle } from "lucide-react";
-import { orders } from "@/lib/seed-data";
-import { formatPrice, formatDate } from "@/lib/utils";
-
-const statusStyles: Record<string, string> = {
-  Processing: "bg-warning-400/10 text-yellow-700 border border-warning-400/30",
-  Shipped: "bg-brand-50 text-brand-700 border border-brand-200",
-  "Out for Delivery": "bg-accent-400/10 text-violet-700 border border-accent-400/30",
-  Delivered: "bg-success-500/10 text-green-700 border border-success-500/30",
-  Cancelled: "bg-danger-400/10 text-red-700 border border-danger-400/30",
-  "Return Initiated": "bg-warning-400/10 text-yellow-700 border border-warning-400/30",
-  "Returned/Refunded": "bg-success-500/10 text-green-700 border border-success-500/30",
-};
 
 export default function AccountDashboardPage() {
   return (
-    <div className="min-h-screen bg-surface-primary">
-      <div className="bg-surface-secondary border-b border-border-subtle">
-        <div className="max-w-5xl mx-auto px-6 py-8">
-          <h1 className="text-3xl font-display font-bold text-text-primary mb-1">
-            My Orders
-          </h1>
-          <p className="text-text-secondary">
-            Track your orders, manage returns, and get support
-          </p>
-        </div>
-      </div>
-
-      <div className="max-w-5xl mx-auto px-6 py-8">
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {[
-            { label: "Total Orders", value: orders.length, color: "brand" },
-            { label: "Active", value: orders.filter((o) => ["Processing", "Shipped", "Out for Delivery"].includes(o.status)).length, color: "accent" },
-            { label: "Delivered", value: orders.filter((o) => o.status === "Delivered").length, color: "success" },
-            { label: "Returns", value: orders.filter((o) => ["Return Initiated", "Returned/Refunded"].includes(o.status)).length, color: "warning" },
-          ].map((stat) => (
-            <div key={stat.label} className="card-elevated p-4 text-center">
-              <p className="text-2xl font-bold text-text-primary">{stat.value}</p>
-              <p className="text-xs text-text-tertiary">{stat.label}</p>
+    <div className="py-12 flex flex-col md:flex-row gap-8">
+      {/* Sidebar Navigation */}
+      <aside className="w-full md:w-64 shrink-0">
+        <GlassCard className="sticky top-32 space-y-4">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-12 h-12 rounded-full bg-[var(--color-sf-primary)] text-white flex items-center justify-center font-bold text-lg">
+              SC
             </div>
-          ))}
-        </div>
-
-        {/* Orders List */}
-        <div className="space-y-4">
-          {orders.map((order, i) => {
-            const emoji =
-              order.items[0].product_name.includes("Book") || order.items[0].product_name.includes("ThinkPad") || order.items[0].product_name.includes("ZenBook") || order.items[0].product_name.includes("Swift") || order.items[0].product_name.includes("Galaxy Book") || order.items[0].product_name.includes("Creator")
-                ? "💻"
-                : order.items[0].product_name.includes("Prism") || order.items[0].product_name.includes("Pixel") || order.items[0].product_name.includes("iPhone") || order.items[0].product_name.includes("OnePlus") || order.items[0].product_name.includes("Galaxy S") || order.items[0].product_name.includes("Nothing")
-                ? "📱"
-                : order.items[0].product_name.includes("Aura") || order.items[0].product_name.includes("AirPods") || order.items[0].product_name.includes("WH-") || order.items[0].product_name.includes("Buds") || order.items[0].product_name.includes("Bose") || order.items[0].product_name.includes("JBL")
-                ? "🎧"
-                : "⌚";
-
-            return (
-              <motion.div
-                key={order.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.04 }}
-              >
-                <Link
-                  href={`/account/orders/${order.id}`}
-                  className="card-elevated p-4 flex items-center gap-4 group"
-                >
-                  <div className="w-14 h-14 rounded-xl bg-surface-tertiary flex items-center justify-center shrink-0">
-                    <span className="text-2xl">{emoji}</span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-mono text-xs text-text-tertiary">{order.id}</span>
-                      <span className={`px-2 py-0.5 rounded-md text-xs font-medium ${statusStyles[order.status] || ""}`}>
-                        {order.status}
-                      </span>
-                    </div>
-                    <p className="text-sm font-medium text-text-primary line-clamp-1">
-                      {order.items.map((item) => item.product_name).join(", ")}
-                    </p>
-                    <p className="text-xs text-text-tertiary mt-1">
-                      {formatDate(order.created_at)} · {order.items.length} item{order.items.length > 1 ? "s" : ""}
-                    </p>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <p className="font-bold text-text-primary">{formatPrice(order.total)}</p>
-                    <ChevronRight className="w-4 h-4 text-text-tertiary group-hover:text-brand-500 group-hover:translate-x-1 transition-all mt-1 ml-auto" />
-                  </div>
-                </Link>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* NexaBot CTA */}
-        <div className="mt-10 p-6 rounded-2xl bg-brand-50 border border-brand-100 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl gradient-brand flex items-center justify-center shadow-md shrink-0">
-            <MessageCircle className="w-6 h-6 text-white" />
+            <div>
+              <h2 className="font-bold">Sarah Connors</h2>
+              <p className="text-xs opacity-60">sarah@example.com</p>
+            </div>
           </div>
-          <div className="flex-1">
-            <p className="font-semibold text-text-primary">Need help with an order?</p>
-            <p className="text-sm text-text-secondary">
-              Ask NexaBot about tracking, returns, warranty, or any other issue.
-            </p>
-          </div>
-          <Link
-            href="/support"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl gradient-brand text-white text-sm font-medium shadow-md"
-          >
-            Open Chat <ChevronRight className="w-4 h-4" />
-          </Link>
+          
+          <nav className="flex flex-col gap-2 text-sm font-medium">
+            <Link href="/account/dashboard" className="px-4 py-2 bg-[var(--color-sf-primary)]/10 text-[var(--color-sf-primary)] rounded-lg">Dashboard</Link>
+            <Link href="/account/orders" className="px-4 py-2 hover:bg-white/50 rounded-lg transition-colors">Order History</Link>
+            <Link href="/account/settings" className="px-4 py-2 hover:bg-white/50 rounded-lg transition-colors">Settings</Link>
+            <button className="px-4 py-2 text-left text-red-500 hover:bg-red-50 rounded-lg transition-colors mt-4">Sign Out</button>
+          </nav>
+        </GlassCard>
+      </aside>
+
+      {/* Main Content Area */}
+      <div className="flex-1 space-y-8">
+        <h1 className="text-3xl font-bold tracking-tight text-[var(--color-sf-foreground)]">Account Overview</h1>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <GlassCard className="space-y-2">
+            <h3 className="font-bold">TechNova Rewards</h3>
+            <p className="text-3xl font-bold text-[var(--color-sf-primary)]">2,450 <span className="text-sm font-normal text-[var(--color-sf-foreground)]">pts</span></p>
+            <p className="text-xs opacity-60">Platinum Member</p>
+          </GlassCard>
+          <GlassCard className="space-y-2">
+            <h3 className="font-bold">Saved Payment</h3>
+            <p className="font-mono mt-2">•••• •••• •••• 4242</p>
+            <p className="text-xs opacity-60">Expires 12/26</p>
+          </GlassCard>
         </div>
+
+        <GlassCard className="space-y-4">
+          <div className="flex items-center justify-between border-b border-[var(--color-sf-border)] pb-4">
+            <h2 className="font-bold text-lg">Recent Orders</h2>
+            <Link href="/account/orders" className="text-sm text-[var(--color-sf-primary)] hover:underline">View All</Link>
+          </div>
+          
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-between p-4 bg-white/40 rounded-lg">
+              <div className="flex items-center gap-4 w-full sm:w-auto">
+                <div className="w-16 h-16 bg-white/60 rounded flex shrink-0"></div>
+                <div>
+                  <h4 className="font-bold text-sm">Order #8492-22</h4>
+                  <p className="text-xs opacity-60">Placed on Oct 24, 2024</p>
+                </div>
+              </div>
+              <div className="w-full sm:w-auto flex items-center justify-between sm:justify-end gap-6">
+                <span className="inline-flex items-center px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold">Delivered</span>
+                <span className="font-bold">$299.00</span>
+              </div>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-between p-4 bg-white/40 rounded-lg">
+              <div className="flex items-center gap-4 w-full sm:w-auto">
+                <div className="w-16 h-16 bg-white/60 rounded flex shrink-0"></div>
+                <div>
+                  <h4 className="font-bold text-sm">Order #8111-99</h4>
+                  <p className="text-xs opacity-60">Placed on Sep 12, 2024</p>
+                </div>
+              </div>
+              <div className="w-full sm:w-auto flex items-center justify-between sm:justify-end gap-6">
+                <span className="inline-flex items-center px-2 py-1 rounded-full bg-gray-200 text-gray-700 text-xs font-bold">Returned</span>
+                <span className="font-bold">$1,299.00</span>
+              </div>
+            </div>
+          </div>
+        </GlassCard>
       </div>
     </div>
   );

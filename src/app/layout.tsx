@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter, Fira_Code, Fira_Sans } from "next/font/google";
+import PageTransition from "@/components/providers/PageTransition";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,44 +9,22 @@ const inter = Inter({
   display: "swap",
 });
 
-const outfit = Outfit({
+const firaCode = Fira_Code({
   subsets: ["latin"],
-  variable: "--font-outfit",
+  variable: "--font-fira-code",
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const firaSans = Fira_Sans({
   subsets: ["latin"],
-  variable: "--font-jetbrains",
-  display: "swap",
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-plus-jakarta-sans",
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-fira-sans",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: "TechNova — Premium Electronics",
-    template: "%s | TechNova",
-  },
-  description:
-    "TechNova CX Command Center — a grounded, trust-first AI customer care system for premium electronics. Powered by NexaBot with live fact-checking and transparent citations.",
-  keywords: [
-    "TechNova",
-    "electronics",
-    "AI customer care",
-    "NexaBot",
-    "customer support",
-  ],
-  openGraph: {
-    title: "TechNova — Premium Electronics",
-    description:
-      "Trust-first AI customer care for premium electronics",
-    type: "website",
-  },
+  title: "TechNova — Premium Electronics",
+  description: "Experience the future of electronics with TechNova.",
 };
 
 export default function RootLayout({
@@ -56,10 +35,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} ${plusJakartaSans.variable}`}
+      className={`${inter.variable} ${firaCode.variable} ${firaSans.variable}`}
     >
-      <body className={`${inter.variable} ${outfit.variable} ${jetbrainsMono.variable} ${plusJakartaSans.variable} font-sans antialiased bg-surface-primary text-text-primary min-h-screen flex flex-col`}>
-        {children}
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-[var(--color-sf-background)] text-[var(--color-sf-foreground)]">
+        <PageTransition>
+          {children}
+        </PageTransition>
       </body>
     </html>
   );
