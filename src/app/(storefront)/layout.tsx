@@ -1,7 +1,12 @@
+"use client";
+
 import Link from "next/link";
 import React from "react";
+import { useCart } from "@/components/providers/CartProvider";
 
 function StorefrontNavbar() {
+  const { totalItems } = useCart();
+
   return (
     <nav className="fixed top-0 w-full z-50 glass-light border-b-0 rounded-b-2xl px-6 py-4 flex items-center justify-between">
       <div className="max-w-7xl mx-auto w-full flex items-center justify-between">
@@ -14,8 +19,13 @@ function StorefrontNavbar() {
           <Link href="/support" className="hover:text-[var(--color-sf-primary)] transition-colors">Support</Link>
         </div>
         <div className="flex items-center gap-4">
-          <Link href="/cart" className="p-2 rounded-full hover:bg-[var(--color-sf-primary)]/10 transition-colors">
+          <Link href="/cart" className="relative p-2 rounded-full hover:bg-[var(--color-sf-primary)]/10 transition-colors">
             Cart
+            {totalItems > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[var(--color-sf-accent)] text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full">
+                {totalItems}
+              </span>
+            )}
           </Link>
           <Link href="/admin/dashboard" className="p-2 rounded-full hover:bg-[var(--color-sf-primary)]/10 transition-colors text-xs opacity-70">
             Admin

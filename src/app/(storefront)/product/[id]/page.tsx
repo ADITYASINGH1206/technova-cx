@@ -2,8 +2,24 @@
 
 import { GlassCard } from "@/components/ui/GlassCard";
 import { motion } from "framer-motion";
+import { useCart } from "@/components/providers/CartProvider";
+import { useState } from "react";
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
+  const { addItem } = useCart();
+  const [added, setAdded] = useState(false);
+
+  const handleAddToCart = () => {
+    addItem({
+      id: "nova-book-pro-x15",
+      name: "NovaBook Pro X15",
+      price: 2499,
+      color: "Space Gray"
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
   return (
     <div className="py-12 flex flex-col lg:flex-row gap-12">
       {/* Product Imagery */}
@@ -60,8 +76,12 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             </div>
           </div>
 
-          <button className="w-full py-4 mt-4 bg-[var(--color-sf-primary)] text-white rounded-xl font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-[var(--color-sf-primary)]/30">
-            Add to Cart
+          <button 
+            onClick={handleAddToCart}
+            disabled={added}
+            className={`w-full py-4 mt-4 text-white rounded-xl font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-[var(--color-sf-primary)]/30 ${added ? 'bg-green-500' : 'bg-[var(--color-sf-primary)]'}`}
+          >
+            {added ? "Added!" : "Add to Cart"}
           </button>
           
           <p className="text-center text-xs opacity-60">

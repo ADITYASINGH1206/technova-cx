@@ -1,51 +1,38 @@
-/* ============================================================
-   POST /api/chat — Main chat endpoint
-   Runs the full Orchestrator → Support → Critic pipeline
-   ============================================================ */
+import { GoogleGenAI } from '@google/genai';
+import { NextRequest, NextResponse } from 'next/server';
 
-import { NextRequest, NextResponse } from "next/server";
-import { runPipeline } from "@/lib/agents/pipeline";
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-export const maxDuration = 60; // Allow up to 60 seconds for the pipeline
-
-export async function POST(request: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const body = await request.json();
-    const { message, conversation_id, customer_id } = body;
+    const { messages } = await req.json();
 
-    if (!message || typeof message !== "string" || message.trim().length === 0) {
-      return NextResponse.json(
-        { error: "Message is required" },
-        { status: 400 }
-      );
+    if (!messages || messages.length === 0) {
+      return NextResponse.json({ error: 'Messages are required' }, { status: 400 });
     }
 
-    // Run the full pipeline
-    const result = await runPipeline({
-      message: message.trim(),
-      conversationId: conversation_id,
-      customerId: customer_id,
+    // Extract the latest user message
+    const latestMessage = messages[messages.length - 1].content;
+
+    // Build history for context (optional, formatting depends on GenAI SDK)
+    const formattedHistory = messages.map((m: any) => `${m.role === 'user' ? 'User' : 'NexaBot'}: ${m.content}`).join('\n');
+
+    const prompt = `You are NexaBot, a helpful, futuristic customer support AI for TechNova, a premium electronics company (selling AeroPhone Pro, NovaBook X15, etc.). Keep your answers concise, helpful, and extremely professional. Use the following conversation history for context:
+    
+    ${formattedHistory}
+    
+    NexaBot:`;
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash',
+      contents: prompt,
     });
 
     return NextResponse.json({
-      response: result.response,
-      citations: result.citations,
-      critic_verdict: result.criticVerdict,
-      intent: result.intent,
-      conversation_id: result.conversationId,
-      escalated: result.escalated,
-      ticket_id: result.ticketId,
-      trace: result.traceLog,
+      text: response.text,
     });
   } catch (error) {
-    console.error("[API /chat] Error:", error);
-
-    return NextResponse.json(
-      {
-        error: "Something went wrong processing your message. Please try again.",
-        details: error instanceof Error ? error.message : "Unknown error",
-      },
-      { status: 500 }
-    );
+    console.error('Gemini API Error:', error);
+    return NextResponse.json({ error: 'Failed to process chat' }, { status: 500 });
   }
 }

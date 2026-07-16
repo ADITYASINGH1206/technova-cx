@@ -46,7 +46,7 @@ export default function AdminDashboardPage() {
               <div className="flex gap-4">
                 <span className="text-[var(--color-admin-accent)]">[14:32:02]</span>
                 <span className="text-purple-400">RAG_FETCH</span>
-                <span>Querying context for "AeroPhone Pro battery life" -> Found 2 chunks.</span>
+                <span>Querying context for "AeroPhone Pro battery life" &rarr; Found 2 chunks.</span>
               </div>
               <div className="flex gap-4">
                 <span className="text-[var(--color-admin-accent)]">[14:32:04]</span>

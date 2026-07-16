@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Fira_Code, Fira_Sans } from "next/font/google";
 import PageTransition from "@/components/providers/PageTransition";
+import { CartProvider } from "@/components/providers/CartProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -38,9 +39,11 @@ export default function RootLayout({
       className={`${inter.variable} ${firaCode.variable} ${firaSans.variable}`}
     >
       <body className="font-sans antialiased min-h-screen flex flex-col bg-[var(--color-sf-background)] text-[var(--color-sf-foreground)]">
-        <PageTransition>
-          {children}
-        </PageTransition>
+        <CartProvider>
+          <PageTransition>
+            {children}
+          </PageTransition>
+        </CartProvider>
       </body>
     </html>
   );
