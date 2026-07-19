@@ -29,8 +29,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } |
       name: product.name,
       price: product.price,
       // For demo purposes, pick a generic property
-      color: "Standard",
-      image: product.image_url
+      color: "Standard"
     });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
