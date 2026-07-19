@@ -38,10 +38,8 @@ function StorefrontNavbar() {
 
 function StorefrontFooter() {
   return (
-    <footer className="mt-20 py-12 border-t border-[var(--color-sf-border)] bg-[var(--color-sf-background)]">
-      <div className="max-w-7xl mx-auto px-6 text-center text-sm opacity-60">
-        © 2024 TechNova. Powered by UI-UX Pro Max Design System.
-      </div>
+    <footer className="w-full mt-24 py-8 border-t border-[var(--color-sf-border)] bg-white/30 text-center text-sm font-medium opacity-60 relative z-10 backdrop-blur-md">
+      © 2026 TechNova. Powered by UI-UX Pro Max Design System.
     </footer>
   );
 }
