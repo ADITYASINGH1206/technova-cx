@@ -10,6 +10,44 @@ import { runSupportAgent } from "./support-agent";
 import { runCriticAgent } from "./critic-agent";
 import type { CriticVerdict, Citation } from "@/types/database";
 
+// In-memory mock DB for air-gapped demo
+const memoryDB: Record<string, any[]> = {
+  conversations: [],
+  messages: [],
+  tickets: [],
+  analytics_events: []
+};
+
+function getMockSupabase() {
+  return {
+    from: (table: string) => {
+      let filteredData = memoryDB[table] || [];
+      const chain = {
+        select: () => chain,
+        eq: (col: string, val: any) => {
+          filteredData = filteredData.filter((r) => r[col] === val);
+          return chain;
+        },
+        order: () => chain,
+        single: async () => ({ data: filteredData[0] || null }),
+        insert: async (row: any) => {
+          memoryDB[table].push(row);
+          return { data: row };
+        },
+        update: (row: any) => ({
+          eq: async (col: string, val: any) => {
+            const items = memoryDB[table].filter((r) => r[col] === val);
+            items.forEach((item) => Object.assign(item, row));
+            return { data: items };
+          }
+        }),
+        then: (resolve: any) => resolve({ data: filteredData }),
+      };
+      return chain;
+    }
+  };
+}
+
 export interface PipelineResult {
   response: string;
   citations: Citation[];
@@ -48,7 +86,16 @@ export async function runPipeline(options: {
 }): Promise<PipelineResult> {
   const { message, customerId } = options;
   let { conversationId } = options;
-  const supabase = createServiceClient();
+  
+  let supabase: any;
+  try {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL) throw new Error("No ENV");
+    supabase = createServiceClient();
+  } catch (e) {
+    console.warn("⚠️ Air-gapped mode: Supabase not configured. Using in-memory mock.");
+    supabase = getMockSupabase();
+  }
+  
   const traceLog: TraceEntry[] = [];
 
   // --- 1. Load or create conversation ---

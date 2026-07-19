@@ -18,7 +18,7 @@ export const products: Product[] = [
     original_price: 109999,
     description: "16-inch Retina display, M4 Pro chip, 18GB unified memory, 512GB SSD. Built for professionals who demand uncompromising performance.",
     specs: { Display: "16.2\" Liquid Retina XDR", Processor: "M4 Pro 12-core", RAM: "18GB Unified", Storage: "512GB SSD", Battery: "22 hours", Weight: "2.14 kg" },
-    image_url: "/products/laptop-1.jpg",
+    image_url: "/technova-probook.png",
     rating: 4.8,
     review_count: 342,
     in_stock: true,
@@ -34,7 +34,7 @@ export const products: Product[] = [
     original_price: 84999,
     description: "Ultra-slim 14-inch OLED laptop with Intel Core Ultra 9, 32GB RAM, and Thunderbolt 5. The perfect balance of power and portability.",
     specs: { Display: "14\" 3K OLED 120Hz", Processor: "Intel Core Ultra 9", RAM: "32GB DDR5", Storage: "1TB SSD", Battery: "16 hours", Weight: "1.28 kg" },
-    image_url: "/products/laptop-2.jpg",
+    image_url: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80",
     rating: 4.6,
     review_count: 218,
     in_stock: true,
@@ -49,7 +49,7 @@ export const products: Product[] = [
     price: 149999,
     description: "Enterprise-grade ultrabook with a 14-inch 2.8K OLED display, Intel Core Ultra 7, and legendary ThinkPad keyboard.",
     specs: { Display: "14\" 2.8K OLED", Processor: "Intel Core Ultra 7", RAM: "32GB LPDDR5X", Storage: "1TB SSD", Battery: "15 hours", Weight: "1.09 kg" },
-    image_url: "/products/laptop-3.jpg",
+    image_url: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&q=80",
     rating: 4.7,
     review_count: 156,
     in_stock: true,
@@ -65,7 +65,7 @@ export const products: Product[] = [
     original_price: 139999,
     description: "15.6-inch mini-LED display with NVIDIA RTX 5070, perfect for video editing, 3D rendering, and creative workflows.",
     specs: { Display: "15.6\" Mini-LED 240Hz", Processor: "Intel Core Ultra 9", GPU: "NVIDIA RTX 5070 8GB", RAM: "32GB DDR5", Storage: "2TB SSD", Weight: "2.3 kg" },
-    image_url: "/products/laptop-4.jpg",
+    image_url: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=800&q=80",
     rating: 4.5,
     review_count: 89,
     in_stock: true,
@@ -80,7 +80,7 @@ export const products: Product[] = [
     price: 54999,
     description: "Ultra-lightweight 14-inch laptop with AMD Ryzen 7, 16GB RAM, and all-day battery. Great value for students and professionals.",
     specs: { Display: "14\" FHD+ IPS", Processor: "AMD Ryzen 7 8845HS", RAM: "16GB LPDDR5", Storage: "512GB SSD", Battery: "13 hours", Weight: "1.15 kg" },
-    image_url: "/products/laptop-5.jpg",
+    image_url: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=800&q=80",
     rating: 4.3,
     review_count: 412,
     in_stock: true,
@@ -95,7 +95,7 @@ export const products: Product[] = [
     price: 179999,
     description: "16-inch Dynamic AMOLED 2X display with Intel Core Ultra 9, 32GB RAM, and ARC GPU. Samsung's flagship AI laptop.",
     specs: { Display: "16\" Dynamic AMOLED 2X", Processor: "Intel Core Ultra 9", GPU: "Intel ARC", RAM: "32GB", Storage: "1TB SSD", Weight: "1.87 kg" },
-    image_url: "/products/laptop-6.jpg",
+    image_url: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?w=800&q=80",
     rating: 4.4,
     review_count: 67,
     in_stock: false,
@@ -111,7 +111,7 @@ export const products: Product[] = [
     original_price: 39999,
     description: "Affordable 14-inch laptop designed for students. Long battery life, lightweight, and built to last.",
     specs: { Display: "14\" FHD IPS", Processor: "Intel Core i5-1345U", RAM: "8GB DDR4", Storage: "256GB SSD", Battery: "10 hours", Weight: "1.5 kg" },
-    image_url: "/products/laptop-7.jpg",
+    image_url: "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&q=80",
     rating: 4.1,
     review_count: 523,
     in_stock: true,
@@ -129,7 +129,7 @@ export const products: Product[] = [
     original_price: 89999,
     description: "6.7-inch Dynamic AMOLED with 200MP camera system, Snapdragon 8 Gen 4, and AI-powered photography. Our flagship phone.",
     specs: { Display: "6.7\" LTPO AMOLED 120Hz", Processor: "Snapdragon 8 Gen 4", RAM: "12GB", Storage: "256GB", Camera: "200MP + 50MP + 12MP", Battery: "5200mAh" },
-    image_url: "/products/phone-1.jpg",
+    image_url: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80",
     rating: 4.7,
     review_count: 891,
     in_stock: true,
@@ -144,7 +144,7 @@ export const products: Product[] = [
     price: 99999,
     description: "Google's AI-first flagship with Tensor G5, triple 50MP camera system, and 7 years of updates.",
     specs: { Display: "6.7\" LTPO OLED 120Hz", Processor: "Tensor G5", RAM: "16GB", Storage: "256GB", Camera: "50MP + 50MP + 48MP", Battery: "5400mAh" },
-    image_url: "/products/phone-2.jpg",
+    image_url: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=800&q=80",
     rating: 4.6,
     review_count: 654,
     in_stock: true,
@@ -159,7 +159,7 @@ export const products: Product[] = [
     price: 134999,
     description: "Titanium design with A20 Pro chip, 48MP camera system, and ProMotion display. The ultimate iPhone experience.",
     specs: { Display: "6.3\" Super Retina XDR", Processor: "A20 Pro", RAM: "8GB", Storage: "256GB", Camera: "48MP + 12MP + 12MP", Battery: "4685mAh" },
-    image_url: "/products/phone-3.jpg",
+    image_url: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=800&q=80",
     rating: 4.8,
     review_count: 1234,
     in_stock: true,
@@ -174,7 +174,7 @@ export const products: Product[] = [
     price: 49999,
     description: "Snapdragon 8 Gen 4 flagship killer with 100W charging, Hasselblad cameras, and OxygenOS 15.",
     specs: { Display: "6.78\" LTPO AMOLED 120Hz", Processor: "Snapdragon 8 Gen 4", RAM: "12GB", Storage: "256GB", Camera: "50MP + 50MP + 8MP", Battery: "6000mAh" },
-    image_url: "/products/phone-4.jpg",
+    image_url: "https://images.unsplash.com/photo-1533228100845-08145b01de14?w=800&q=80",
     rating: 4.5,
     review_count: 723,
     in_stock: true,
@@ -190,7 +190,7 @@ export const products: Product[] = [
     original_price: 24999,
     description: "Affordable 6.5-inch AMOLED phone with great cameras and all-day battery. Perfect for everyday use.",
     specs: { Display: "6.5\" AMOLED 90Hz", Processor: "Dimensity 8300", RAM: "8GB", Storage: "128GB", Camera: "64MP + 8MP", Battery: "5000mAh" },
-    image_url: "/products/phone-5.jpg",
+    image_url: "https://images.unsplash.com/photo-1556656793-08538906a9f8?w=800&q=80",
     rating: 4.2,
     review_count: 1567,
     in_stock: true,
@@ -205,7 +205,7 @@ export const products: Product[] = [
     price: 124999,
     description: "Samsung's ultimate flagship with S Pen, 200MP camera, and Galaxy AI built in.",
     specs: { Display: "6.9\" Dynamic AMOLED 2X", Processor: "Snapdragon 8 Gen 4", RAM: "12GB", Storage: "512GB", Camera: "200MP + 50MP + 10MP + 12MP", Battery: "5000mAh" },
-    image_url: "/products/phone-6.jpg",
+    image_url: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=800&q=80",
     rating: 4.6,
     review_count: 892,
     in_stock: true,
@@ -220,7 +220,7 @@ export const products: Product[] = [
     price: 37999,
     description: "Unique transparent design with Glyph Interface, Snapdragon 8s Gen 4, and Nothing OS 4.0.",
     specs: { Display: "6.7\" LTPO OLED 120Hz", Processor: "Snapdragon 8s Gen 4", RAM: "12GB", Storage: "256GB", Camera: "50MP + 50MP", Battery: "5000mAh" },
-    image_url: "/products/phone-7.jpg",
+    image_url: "https://images.unsplash.com/photo-1546054454-aa26e2b734c7?w=800&q=80",
     rating: 4.4,
     review_count: 445,
     in_stock: true,
@@ -238,7 +238,7 @@ export const products: Product[] = [
     original_price: 29999,
     description: "Premium wireless ANC headphones with spatial audio, 40-hour battery, and studio-grade sound.",
     specs: { Type: "Over-Ear Wireless", ANC: "Adaptive Active Noise Cancellation", Driver: "40mm Planar Magnetic", Battery: "40 hours", Connectivity: "Bluetooth 5.4 + 3.5mm", Weight: "254g" },
-    image_url: "/products/headphone-1.jpg",
+    image_url: "https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=800&q=80",
     rating: 4.7,
     review_count: 678,
     in_stock: true,
@@ -253,7 +253,7 @@ export const products: Product[] = [
     price: 24900,
     description: "Apple's premium earbuds with H3 chip, Adaptive Audio, and conversation awareness.",
     specs: { Type: "In-Ear Wireless", ANC: "Active Noise Cancellation", Driver: "Custom Apple Driver", Battery: "6h (30h with case)", Connectivity: "Bluetooth 5.3", Weight: "5.3g each" },
-    image_url: "/products/headphone-2.jpg",
+    image_url: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
     rating: 4.6,
     review_count: 2134,
     in_stock: true,
@@ -268,7 +268,7 @@ export const products: Product[] = [
     price: 29999,
     description: "Industry-leading noise cancellation with multipoint connectivity and 30-hour battery.",
     specs: { Type: "Over-Ear Wireless", ANC: "AI Noise Cancellation", Driver: "30mm", Battery: "30 hours", Connectivity: "Bluetooth 5.4 + 3.5mm", Weight: "264g" },
-    image_url: "/products/headphone-3.jpg",
+    image_url: "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=800&q=80",
     rating: 4.8,
     review_count: 1567,
     in_stock: true,
@@ -284,7 +284,7 @@ export const products: Product[] = [
     original_price: 6999,
     description: "True wireless earbuds with ANC, 30-hour total battery, and IPX5 water resistance. Incredible value.",
     specs: { Type: "In-Ear TWS", ANC: "Hybrid ANC", Driver: "12.4mm Dynamic", Battery: "8h (30h with case)", Connectivity: "Bluetooth 5.3", Weight: "4.7g each" },
-    image_url: "/products/headphone-4.jpg",
+    image_url: "https://images.unsplash.com/photo-1606220588913-b3aacb4d2f46?w=800&q=80",
     rating: 4.3,
     review_count: 3421,
     in_stock: true,
@@ -299,7 +299,7 @@ export const products: Product[] = [
     price: 34999,
     description: "Bose's premium over-ear headphones with immersive audio and world-class noise cancellation.",
     specs: { Type: "Over-Ear Wireless", ANC: "CustomTune Noise Cancellation", Driver: "35mm Triport", Battery: "24 hours", Connectivity: "Bluetooth 5.3 + USB-C", Weight: "250g" },
-    image_url: "/products/headphone-5.jpg",
+    image_url: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&q=80",
     rating: 4.5,
     review_count: 892,
     in_stock: true,
@@ -314,7 +314,7 @@ export const products: Product[] = [
     price: 19999,
     description: "JBL Pro Sound with True Adaptive ANC, Smart Ambient, and 50-hour battery life.",
     specs: { Type: "Over-Ear Wireless", ANC: "True Adaptive ANC", Driver: "40mm", Battery: "50 hours", Connectivity: "Bluetooth 5.3 + 3.5mm", Weight: "268g" },
-    image_url: "/products/headphone-6.jpg",
+    image_url: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800&q=80",
     rating: 4.4,
     review_count: 356,
     in_stock: true,
@@ -332,7 +332,7 @@ export const products: Product[] = [
     original_price: 34999,
     description: "Advanced health monitoring with ECG, blood oxygen, body temperature, and 14-day battery. Titanium build.",
     specs: { Display: "1.5\" AMOLED Always-On", Sensors: "ECG + SpO2 + Temp", Battery: "14 days", Water: "10ATM", Material: "Grade 5 Titanium", Weight: "42g" },
-    image_url: "/products/watch-1.jpg",
+    image_url: "https://images.unsplash.com/photo-1544117519-31a4b719223d?w=800&q=80",
     rating: 4.6,
     review_count: 445,
     in_stock: true,
@@ -347,7 +347,7 @@ export const products: Product[] = [
     price: 89999,
     description: "The most rugged Apple Watch with precision dual-frequency GPS, 72-hour battery, and satellite connectivity.",
     specs: { Display: "2.12\" LTPO OLED Always-On", Sensors: "ECG + SpO2 + Temp + Depth", Battery: "72 hours", Water: "100m WR", Material: "Titanium", Weight: "61.4g" },
-    image_url: "/products/watch-2.jpg",
+    image_url: "https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=800&q=80",
     rating: 4.7,
     review_count: 678,
     in_stock: true,
@@ -362,7 +362,7 @@ export const products: Product[] = [
     price: 44999,
     description: "Samsung's most advanced smartwatch with dual-frequency GPS, energy score, and Galaxy AI health insights.",
     specs: { Display: "1.47\" Super AMOLED", Sensors: "BioActive Sensor", Battery: "3 days", Water: "10ATM + IP68", Material: "Titanium Grade 4", Weight: "60.5g" },
-    image_url: "/products/watch-3.jpg",
+    image_url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
     rating: 4.5,
     review_count: 523,
     in_stock: true,
@@ -378,7 +378,7 @@ export const products: Product[] = [
     original_price: 12999,
     description: "Stylish fitness tracker with AMOLED display, heart rate monitoring, and 10-day battery. Great starter smartwatch.",
     specs: { Display: "1.43\" AMOLED", Sensors: "HR + SpO2", Battery: "10 days", Water: "5ATM", Material: "Aluminum", Weight: "31g" },
-    image_url: "/products/watch-4.jpg",
+    image_url: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&q=80",
     rating: 4.2,
     review_count: 1892,
     in_stock: true,
@@ -393,7 +393,7 @@ export const products: Product[] = [
     price: 39999,
     description: "GPS smartwatch with AMOLED display, advanced health monitoring, and up to 11 days battery. Made for athletes.",
     specs: { Display: "1.4\" AMOLED", Sensors: "Elevate v5 HR + SpO2 + ECG", Battery: "11 days", Water: "5ATM", Material: "Stainless Steel", Weight: "46g" },
-    image_url: "/products/watch-5.jpg",
+    image_url: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
     rating: 4.6,
     review_count: 334,
     in_stock: true,
@@ -740,3 +740,53 @@ export const categories = [
     gradient: "from-emerald-500 to-teal-600",
   },
 ];
+
+// --- KB POLICIES (15 policy snippets across 7 categories) ---
+export interface Policy {
+  id: string;
+  category: string;
+  title: string;
+  body: string;
+  version: number;
+}
+
+export const kbPolicies: Policy[] = [
+  // Returns & Refunds
+  { id: "RR-001", category: "Returns & Refunds", title: "Return Window", body: "Products can be returned within 7 days of delivery. The item must be unused, in its original packaging, with all accessories and tags intact. Digital products and opened software are non-returnable.", version: 2 },
+  { id: "RR-002", category: "Returns & Refunds", title: "Refund Processing", body: "Refunds are processed within 5-7 business days after we receive and inspect the returned item. The refund is credited to the original payment method. UPI refunds are typically faster (2-3 business days).", version: 2 },
+  { id: "RR-003", category: "Returns & Refunds", title: "Non-Returnable Items", body: "The following items cannot be returned: earbuds/headphones with broken hygiene seals, software licenses, gift cards, and items damaged by the customer. Items purchased during flash sales with 'No Return' tags are final sale.", version: 1 },
+
+  // Shipping & Delivery
+  { id: "SD-001", category: "Shipping & Delivery", title: "Delivery Timeline", body: "Standard shipping takes 3-7 business days depending on your location. Metro cities (Delhi, Mumbai, Bengaluru, Chennai, Hyderabad, Kolkata) typically receive orders within 3-4 business days. Remote areas may take up to 10 business days.", version: 3 },
+  { id: "SD-002", category: "Shipping & Delivery", title: "Free Shipping Policy", body: "Free shipping is available on all orders above ₹999. Orders below ₹999 incur a flat shipping fee of ₹99. Express shipping (1-2 business days) is available in select metros for an additional ₹299.", version: 2 },
+  { id: "SD-003", category: "Shipping & Delivery", title: "Shipping Partners", body: "We ship through BlueDart, Delhivery, and DTDC. Tracking information is shared via email and SMS once the order is dispatched. You can also track your order from the Account Dashboard.", version: 1 },
+
+  // Billing & Payments
+  { id: "BP-001", category: "Billing & Payments", title: "Accepted Payment Methods", body: "We accept UPI (Google Pay, PhonePe, Paytm), credit cards (Visa, Mastercard, Amex, RuPay), debit cards, net banking (all major banks), and EMI options on select cards. Cash on Delivery (COD) is available for orders up to ₹50,000.", version: 2 },
+  { id: "BP-002", category: "Billing & Payments", title: "EMI Options", body: "No-cost EMI is available on select products for 3, 6, and 9-month tenures on HDFC, ICICI, SBI, and Axis credit cards. Standard EMI with interest is available on all other supported cards. EMI processing fee may apply.", version: 1 },
+
+  // Warranty & Repairs
+  { id: "WR-001", category: "Warranty & Repairs", title: "Standard Warranty Coverage", body: "Laptops, Phones, and Smartwatches carry a 12-month manufacturer warranty from the date of purchase. Headphones carry a 6-month warranty. Warranty covers manufacturing defects and hardware failures under normal use.", version: 2 },
+  { id: "WR-002", category: "Warranty & Repairs", title: "Warranty Exclusions", body: "Warranty does not cover: physical damage (drops, water damage, screen cracks), damage from unauthorized modifications or repairs, normal wear and tear (battery degradation, cosmetic scratches), or accessories (chargers, cables, cases).", version: 2 },
+  { id: "WR-003", category: "Warranty & Repairs", title: "Warranty Claim Process", body: "To file a warranty claim: (1) Contact NexaBot with your order ID, (2) describe the issue, (3) NexaBot will verify your warranty status and create a claim ticket, (4) you'll receive a prepaid return label, (5) ship the item, (6) we inspect and repair/replace within 7-10 business days.", version: 3 },
+
+  // Replacement & Exchange
+  { id: "RE-001", category: "Replacement & Exchange", title: "Replacement Policy", body: "If you receive a defective or damaged product, you can request a replacement within 48 hours of delivery. Photo evidence of the defect/damage is required. Replacement is subject to stock availability — if unavailable, a full refund is processed.", version: 2 },
+  { id: "RE-002", category: "Replacement & Exchange", title: "Exchange Policy", body: "Product exchanges (e.g., different color or variant) are available within 7 days of delivery for select categories. The item must be unused and in original packaging. Price differences are adjusted via the original payment method.", version: 1 },
+
+  // Order Cancellation
+  { id: "OC-001", category: "Order Cancellation", title: "Cancellation Window", body: "Orders can be cancelled within 2 hours of placement or before the order status changes to 'Shipped', whichever comes first. Once an order is shipped, it cannot be cancelled — you may refuse delivery or initiate a return after delivery.", version: 2 },
+  { id: "OC-002", category: "Order Cancellation", title: "Cancellation Refund", body: "Cancelled orders are refunded within 3-5 business days to the original payment method. COD orders that are cancelled have no refund to process. Prepaid cancellations receive a full refund including any shipping charges paid.", version: 1 },
+
+  // Account & Security
+  { id: "AS-001", category: "Account & Security", title: "Account Security", body: "Your TechNova account is protected with industry-standard encryption. We recommend using a strong, unique password and enabling two-factor authentication (2FA) when available. Never share your login credentials or OTP with anyone.", version: 2 },
+  { id: "AS-002", category: "Account & Security", title: "Data Privacy", body: "We collect only the data necessary to process orders and provide support. Your personal information is never sold to third parties. You can request account data export or deletion by contacting support. Full privacy policy is available on our website.", version: 1 },
+];
+
+export function getPoliciesByCategory(category: string): Policy[] {
+  return kbPolicies.filter((p) => p.category === category);
+}
+
+export function getAllPolicyCategories(): string[] {
+  return [...new Set(kbPolicies.map((p) => p.category))];
+}
