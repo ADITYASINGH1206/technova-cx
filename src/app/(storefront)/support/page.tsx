@@ -117,11 +117,19 @@ export default function SupportChatPage() {
   };
 
   const quickReplies = [
-    "Where is order ORD-7734?",
-    "Can I return my AeroPhone Pro?",
-    "Is my NovaBook Pro X15 under warranty?",
-    "I want to speak to a human manager immediately."
+    "📦 Where is order ORD-7734?",
+    "🔄 Can I return my AeroPhone Pro?",
+    "🛡️ Is NovaBook Pro X15 under warranty?",
+    "⚠️ I need to speak to a human manager."
   ];
+
+  const renderBoldText = (text: string) => {
+    return text.split(/(\*\*.*?\*\*)/).map((part, i) =>
+      part.startsWith('**') && part.endsWith('**')
+        ? <strong key={i} className="font-bold">{part.slice(2, -2)}</strong>
+        : part
+    );
+  };
 
   return (
     <div className="flex flex-col h-[calc(100vh-80px)] max-w-4xl mx-auto p-4 md:p-6">
@@ -154,7 +162,7 @@ export default function SupportChatPage() {
                   : 'bg-slate-900/90 border border-slate-800 text-slate-200 rounded-bl-none'
               }`}
             >
-              <p className="whitespace-pre-wrap text-sm md:text-base leading-relaxed">{msg.text}</p>
+              <p className="whitespace-pre-wrap text-sm md:text-base leading-relaxed">{renderBoldText(msg.text)}</p>
 
               {/* Citation Chips */}
               {msg.citations && msg.citations.length > 0 && (
@@ -232,11 +240,11 @@ export default function SupportChatPage() {
 
             {/* Escalation Floating Card */}
             {msg.escalated && (
-              <div className="mt-2 w-full max-w-[85%] md:max-w-[75%] p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-start space-x-3 text-amber-200 animate-fade-in">
+              <div className="mt-2 w-full max-w-[85%] md:max-w-[75%] p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/60 flex items-start space-x-3 text-amber-900 dark:text-amber-200 animate-fade-in">
                 <span className="text-xl">⚠️</span>
                 <div className="text-xs">
-                  <p className="font-semibold text-amber-300">Escalated to Human Agent</p>
-                  <p className="mt-0.5 text-amber-200/80">
+                  <p className="font-bold text-amber-900 dark:text-amber-300">Escalated to Human Agent</p>
+                  <p className="mt-0.5 text-amber-800 dark:text-amber-200/90">
                     {msg.ticketId 
                       ? `Ticket #${msg.ticketId} has been created. A priority customer success manager is reviewing your trace history.`
                       : 'Our Critic AI flagged this request for manual review. An agent will connect shortly.'}
