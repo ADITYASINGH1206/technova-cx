@@ -21,8 +21,8 @@ export default function AccountDashboardPage() {
           
           <nav className="flex flex-col gap-2 text-sm font-medium">
             <Link href="/account/dashboard" className="px-4 py-2 bg-[var(--color-sf-primary)]/10 text-[var(--color-sf-primary)] rounded-lg">Dashboard</Link>
-            <Link href="/account/orders" className="px-4 py-2 hover:bg-white/50 rounded-lg transition-colors">Order History</Link>
-            <Link href="/account/settings" className="px-4 py-2 hover:bg-white/50 rounded-lg transition-colors">Settings</Link>
+            <Link href="/account/orders" className="px-4 py-2 hover:bg-white/50 dark:bg-slate-800/50 rounded-lg transition-colors">Order History</Link>
+            <Link href="/account/settings" className="px-4 py-2 hover:bg-white/50 dark:bg-slate-800/50 rounded-lg transition-colors">Settings</Link>
             <button className="px-4 py-2 text-left text-red-500 hover:bg-red-50 rounded-lg transition-colors mt-4">Sign Out</button>
           </nav>
         </GlassCard>
@@ -52,31 +52,33 @@ export default function AccountDashboardPage() {
           </div>
           
           <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-between p-4 bg-white/40 rounded-lg">
-              <div className="flex items-center gap-4 w-full sm:w-auto">
-                <div className="w-16 h-16 bg-white/60 rounded flex shrink-0"></div>
+            <div className="flex justify-between items-center py-3">
+              <div className="flex gap-4">
+                <div className="w-12 h-12 bg-white/40 dark:bg-slate-800/40 rounded flex items-center justify-center shrink-0 opacity-60">Img</div>
                 <div>
-                  <h4 className="font-bold text-sm">Order #8492-22</h4>
+                  <p className="font-bold text-sm">AeroPhone Pro</p>
                   <p className="text-xs opacity-60">Placed on Oct 24, 2024</p>
                 </div>
               </div>
-              <div className="w-full sm:w-auto flex items-center justify-between sm:justify-end gap-6">
-                <span className="inline-flex items-center px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold">Delivered</span>
-                <span className="font-bold">$299.00</span>
+              <div className="text-right">
+                <span className="font-bold">₹29,999</span>
+                <p className="text-xs text-[var(--color-sf-primary)] font-bold">Shipped</p>
               </div>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 items-center justify-between p-4 bg-white/40 rounded-lg">
-              <div className="flex items-center gap-4 w-full sm:w-auto">
-                <div className="w-16 h-16 bg-white/60 rounded flex shrink-0"></div>
+            <hr className="border-[var(--color-sf-border)]" />
+            
+            <div className="flex justify-between items-center py-3">
+              <div className="flex gap-4">
+                <div className="w-12 h-12 bg-white/40 dark:bg-slate-800/40 rounded flex items-center justify-center shrink-0 opacity-60">Img</div>
                 <div>
-                  <h4 className="font-bold text-sm">Order #8111-99</h4>
+                  <p className="font-bold text-sm">NovaBook X15</p>
                   <p className="text-xs opacity-60">Placed on Sep 12, 2024</p>
                 </div>
               </div>
-              <div className="w-full sm:w-auto flex items-center justify-between sm:justify-end gap-6">
-                <span className="inline-flex items-center px-2 py-1 rounded-full bg-gray-200 text-gray-700 text-xs font-bold">Returned</span>
-                <span className="font-bold">$1,299.00</span>
+              <div className="text-right">
+                <span className="font-bold">₹1,24,999</span>
+                <p className="text-xs text-green-600 font-bold">Delivered</p>
               </div>
             </div>
           </div>

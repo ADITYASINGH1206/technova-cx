@@ -19,15 +19,15 @@
   --shadow-glass-lg: 0 16px 48px rgba(37, 99, 235, 0.12);
 
   /* ========================================================= */
-  /* ADMIN DASHBOARD: OLED (Dark Mode)                         */
+  /* ADMIN DASHBOARD: Light Mode Default                       */
   /* ========================================================= */
-  --color-admin-primary: #0f172a;
-  --color-admin-secondary: #1e293b;
-  --color-admin-accent: #22c55e;
-  --color-admin-background: #020617;
-  --color-admin-foreground: #f8fafc;
-  --color-admin-muted: #1a1e2f;
-  --color-admin-border: #334155;
+  --color-admin-primary: #ffffff;
+  --color-admin-secondary: #f1f5f9;
+  --color-admin-accent: #16a34a; /* Darker green for contrast */
+  --color-admin-background: #f8fafc;
+  --color-admin-foreground: #0f172a;
+  --color-admin-muted: #e2e8f0;
+  --color-admin-border: #cbd5e1;
   --color-admin-destructive: #ef4444;
 
   /* Typography */
@@ -40,6 +40,28 @@
   background-color: var(--color-sf-background);
   color: var(--color-sf-foreground);
   font-family: var(--font-sans);
+}
+
+.dark {
+  --color-sf-background: #020617; /* Very dark slate */
+  --color-sf-foreground: #f8fafc;
+  --color-sf-border: #334155;
+  
+  --color-glass-surface: rgba(15, 23, 42, 0.7);
+  --color-glass-border: rgba(51, 65, 85, 0.5);
+
+  --shadow-glass-sm: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-glass-md: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-glass-lg: 0 16px 48px rgba(0, 0, 0, 0.4);
+
+  /* Admin Dark Mode */
+  --color-admin-primary: #0f172a;
+  --color-admin-secondary: #1e293b;
+  --color-admin-accent: #22c55e;
+  --color-admin-background: #020617;
+  --color-admin-foreground: #f8fafc;
+  --color-admin-muted: #1a1e2f;
+  --color-admin-border: #334155;
 }
 
 /* Glassmorphism Utilities (WCAG AA Compliant Text Contrast) */

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React from "react";
 import { useCart } from "@/components/providers/CartProvider";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 function StorefrontNavbar() {
   const { totalItems } = useCart();
@@ -19,6 +20,7 @@ function StorefrontNavbar() {
           <Link href="/support" className="hover:text-[var(--color-sf-primary)] transition-colors">Support</Link>
         </div>
         <div className="flex items-center gap-4">
+          <ThemeToggle />
           <Link href="/cart" className="relative p-2 rounded-full hover:bg-[var(--color-sf-primary)]/10 transition-colors">
             Cart
             {totalItems > 0 && (
@@ -38,8 +40,8 @@ function StorefrontNavbar() {
 
 function StorefrontFooter() {
   return (
-    <footer className="w-full mt-24 py-8 border-t border-[var(--color-sf-border)] bg-white/30 text-center text-sm font-medium opacity-60 relative z-10 backdrop-blur-md">
-      © 2026 TechNova. Powered by UI-UX Pro Max Design System.
+    <footer className="w-full mt-24 py-8 border-t border-[var(--color-sf-border)] bg-white/30 dark:bg-black/30 text-center text-sm font-medium opacity-60 relative z-10 backdrop-blur-md">
+      © 2026 TechNova. Powered by OMNIVISION.
     </footer>
   );
 }

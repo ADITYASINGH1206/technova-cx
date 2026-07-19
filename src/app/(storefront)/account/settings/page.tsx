@@ -10,8 +10,8 @@ export default function AccountSettingsPage() {
       <aside className="w-full md:w-64 shrink-0">
         <GlassCard className="sticky top-32 space-y-4">
           <nav className="flex flex-col gap-2 text-sm font-medium">
-            <Link href="/account/dashboard" className="px-4 py-2 hover:bg-white/50 rounded-lg transition-colors">Dashboard</Link>
-            <Link href="/account/orders" className="px-4 py-2 hover:bg-white/50 rounded-lg transition-colors">Order History</Link>
+            <Link href="/account/dashboard" className="px-4 py-2 hover:bg-white/50 dark:bg-slate-800/50 rounded-lg transition-colors">Dashboard</Link>
+            <Link href="/account/orders" className="px-4 py-2 hover:bg-white/50 dark:bg-slate-800/50 rounded-lg transition-colors">Order History</Link>
             <Link href="/account/settings" className="px-4 py-2 bg-[var(--color-sf-primary)]/10 text-[var(--color-sf-primary)] rounded-lg">Settings</Link>
           </nav>
         </GlassCard>
@@ -26,15 +26,15 @@ export default function AccountSettingsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium opacity-80 mb-1">First Name</label>
-              <input type="text" defaultValue="Sarah" className="w-full bg-white/50 border border-[var(--color-sf-border)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-sf-primary)]" />
+              <input type="text" defaultValue="Sarah" className="w-full bg-white/50 dark:bg-slate-800/50 border border-[var(--color-sf-border)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-sf-primary)]" />
             </div>
             <div>
               <label className="block text-sm font-medium opacity-80 mb-1">Last Name</label>
-              <input type="text" defaultValue="Connors" className="w-full bg-white/50 border border-[var(--color-sf-border)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-sf-primary)]" />
+              <input type="text" defaultValue="Connors" className="w-full bg-white/50 dark:bg-slate-800/50 border border-[var(--color-sf-border)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-sf-primary)]" />
             </div>
             <div className="md:col-span-2">
               <label className="block text-sm font-medium opacity-80 mb-1">Email Address</label>
-              <input type="email" defaultValue="sarah@example.com" className="w-full bg-white/50 border border-[var(--color-sf-border)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-sf-primary)]" />
+              <input type="email" defaultValue="sarah@example.com" className="w-full bg-white/50 dark:bg-slate-800/50 border border-[var(--color-sf-border)] rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--color-sf-primary)]" />
             </div>
           </div>
           <button className="px-6 py-2 bg-[var(--color-sf-primary)] text-white font-bold rounded-lg hover:scale-105 transition-transform shadow-md shadow-[var(--color-sf-primary)]/20">

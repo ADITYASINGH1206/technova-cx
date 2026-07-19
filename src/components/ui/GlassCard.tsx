@@ -42,10 +42,10 @@ export function GlassCard({
     >
       {/* 
         Optional: Subtle gradient shine overlay to enhance glass effect.
-        Hidden if dark mode to maintain dense, matte look.
+        Inverts subtly for global dark mode.
       */}
       {!dark && (
-        <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-white/40 dark:from-white/5 to-transparent pointer-events-none" />
       )}
       
       {/* Content wrapper to stay above the shine overlay */}

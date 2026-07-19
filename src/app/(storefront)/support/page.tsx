@@ -134,12 +134,12 @@ export default function SupportChatPage() {
   return (
     <div className="flex flex-col h-[calc(100vh-80px)] max-w-4xl mx-auto p-4 md:p-6">
       {/* Chat Header with Intent Badge */}
-      <div className="flex items-center justify-between p-4 mb-4 rounded-xl bg-slate-900/80 border border-slate-800 backdrop-blur-md">
+      <div className="flex items-center justify-between p-4 mb-4 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 backdrop-blur-md shadow-sm">
         <div className="flex items-center space-x-3">
           <div className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse" />
           <div>
-            <h1 className="font-semibold text-white">NexaBot AI Support</h1>
-            <p className="text-xs text-slate-400">Powered by Orchestrator & Critic Pipeline</p>
+            <h1 className="font-semibold text-slate-900 dark:text-white">NexaBot AI Support</h1>
+            <p className="text-xs text-slate-500 dark:text-slate-400">Powered by Orchestrator & Critic Pipeline</p>
           </div>
         </div>
         <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getIntentBadgeColor(currentIntent)}`}>
@@ -148,7 +148,7 @@ export default function SupportChatPage() {
       </div>
 
       {/* Message Window */}
-      <div className="flex-1 overflow-y-auto space-y-4 pr-2 mb-4 scrollbar-thin scrollbar-thumb-slate-800">
+      <div className="flex-1 overflow-y-auto space-y-4 pr-2 mb-4 scrollbar-thin scrollbar-thumb-slate-300 dark:scrollbar-thumb-slate-800">
         {messages.map((msg) => (
           <div
             key={msg.id}
@@ -159,22 +159,22 @@ export default function SupportChatPage() {
               className={`max-w-[85%] md:max-w-[75%] p-4 rounded-2xl ${
                 msg.sender === 'user'
                   ? 'bg-blue-600 text-white rounded-br-none'
-                  : 'bg-slate-900/90 border border-slate-800 text-slate-200 rounded-bl-none'
+                  : 'bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-bl-none shadow-sm'
               }`}
             >
               <p className="whitespace-pre-wrap text-sm md:text-base leading-relaxed">{renderBoldText(msg.text)}</p>
 
               {/* Citation Chips */}
               {msg.citations && msg.citations.length > 0 && (
-                <div className="mt-3 pt-3 border-t border-slate-800/80 flex flex-wrap gap-1.5">
-                  <span className="text-[11px] text-slate-400 self-center mr-1">Grounded in:</span>
+                <div className="mt-3 pt-3 border-t border-slate-200 dark:border-slate-800/80 flex flex-wrap gap-1.5">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 self-center mr-1">Grounded in:</span>
                   {msg.citations.map((cite, idx) => (
                     <a
                       key={idx}
                       href={`/policies#${cite.policyId || 'general'}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800 text-blue-400 hover:bg-slate-700 hover:text-blue-300 transition-colors border border-slate-700"
+                      className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-blue-600 dark:text-blue-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700"
                     >
                       🛡️ {cite.title}
                     </a>
@@ -184,10 +184,10 @@ export default function SupportChatPage() {
 
               {/* AI Trace Drawer Toggle */}
               {msg.sender === 'bot' && msg.intent !== 'SUPPORT_GREETING' && (
-                <div className="mt-3 pt-2 border-t border-slate-800/50">
+                <div className="mt-3 pt-2 border-t border-slate-200 dark:border-slate-800/50">
                   <button 
                     onClick={() => setExpandedTraceId(expandedTraceId === msg.id ? null : msg.id)}
-                    className="flex items-center space-x-1 text-[11px] font-mono text-slate-400 hover:text-emerald-400 transition-colors"
+                    className="flex items-center space-x-1 text-[11px] font-mono text-slate-500 dark:text-slate-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
                   >
                     <span>⚡ View AI Trace</span>
                     <span className="transform transition-transform" style={{ transform: expandedTraceId === msg.id ? 'rotate(180deg)' : 'none' }}>▼</span>
@@ -195,17 +195,17 @@ export default function SupportChatPage() {
                   
                   {/* Expanded Drawer */}
                   {expandedTraceId === msg.id && (
-                    <div className="mt-3 p-3 bg-black/60 rounded-lg border border-slate-700 font-mono text-[10px] sm:text-xs overflow-hidden">
+                    <div className="mt-3 p-3 bg-slate-50 dark:bg-black/60 rounded-lg border border-slate-200 dark:border-slate-700 font-mono text-[10px] sm:text-xs overflow-hidden">
                       <div className="mb-2">
-                        <span className="text-purple-400 font-bold">▶ ORCHESTRATOR</span>
-                        <div className="pl-3 mt-1 text-slate-300">
-                          Classified Intent: <span className="text-white bg-purple-500/20 px-1 rounded">{msg.intent || 'UNKNOWN'}</span>
+                        <span className="text-purple-600 dark:text-purple-400 font-bold">▶ ORCHESTRATOR</span>
+                        <div className="pl-3 mt-1 text-slate-700 dark:text-slate-300">
+                          Classified Intent: <span className="text-white bg-purple-500 px-1 rounded">{msg.intent || 'UNKNOWN'}</span>
                         </div>
                       </div>
                       
                       <div className="mb-2">
-                        <span className="text-blue-400 font-bold">▶ SUPPORT AGENT</span>
-                        <div className="pl-3 mt-1 text-slate-300 space-y-1">
+                        <span className="text-blue-600 dark:text-blue-400 font-bold">▶ SUPPORT AGENT</span>
+                        <div className="pl-3 mt-1 text-slate-700 dark:text-slate-300 space-y-1">
                           {msg.traceLog ? (
                             msg.traceLog.filter((log) => log.includes('Support Agent')).map((log, idx) => (
                               <div key={idx} className="break-all">{log.replace(/\[\d{2}:\d{2}:\d{2}\.\d{3}\] \[Support Agent\] /, '')}</div>
@@ -217,11 +217,11 @@ export default function SupportChatPage() {
                       </div>
 
                       <div>
-                        <span className="text-emerald-400 font-bold">▶ CRITIC AGENT</span>
-                        <div className="pl-3 mt-1 text-slate-300">
+                        <span className="text-emerald-600 dark:text-emerald-400 font-bold">▶ CRITIC AGENT</span>
+                        <div className="pl-3 mt-1 text-slate-700 dark:text-slate-300">
                           {msg.criticVerdict ? (
                             <>
-                              <div>Verification Verdict: <span className={msg.criticVerdict.verdict === 'pass' ? 'text-emerald-400 font-bold' : 'text-red-400 font-bold'}>{msg.criticVerdict.verdict.toUpperCase()}</span></div>
+                              <div>Verification Verdict: <span className={msg.criticVerdict.verdict === 'pass' ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-red-600 dark:text-red-400 font-bold'}>{msg.criticVerdict.verdict.toUpperCase()}</span></div>
                               <div>Confidence Score: {(msg.criticVerdict.confidence * 100).toFixed(0)}%</div>
                               {msg.criticVerdict.claims_checked?.length > 0 && (
                                 <div className="mt-1 text-slate-500">{msg.criticVerdict.claims_checked.length} facts verified against KB</div>
@@ -276,7 +276,7 @@ export default function SupportChatPage() {
             <button
               key={i}
               onClick={() => handleSend(undefined, reply)}
-              className="whitespace-nowrap px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium rounded-full border border-slate-700 transition-colors"
+              className="whitespace-nowrap px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium rounded-full border border-slate-200 dark:border-slate-700 transition-colors shadow-sm"
             >
               {reply}
             </button>
@@ -292,7 +292,7 @@ export default function SupportChatPage() {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about an order (e.g., ORD-7734), warranty, or return policy..."
           disabled={loading}
-          className="flex-1 bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all disabled:opacity-50"
+          className="flex-1 bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all disabled:opacity-50 shadow-sm"
         />
         <button
           type="submit"

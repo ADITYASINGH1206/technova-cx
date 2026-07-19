@@ -28,14 +28,14 @@ export default function CartPage() {
           {/* Cart Items */}
           {items.map((item) => (
             <GlassCard key={item.id} className="flex items-center gap-6 p-4">
-              <div className="w-24 h-24 bg-white/40 rounded-lg shrink-0 flex items-center justify-center">
+              <div className="w-24 h-24 bg-white/40 dark:bg-slate-800/40 rounded-lg shrink-0 flex items-center justify-center">
                 <span className="opacity-40 text-xs font-bold text-center">Product<br/>Image</span>
               </div>
               <div className="flex-1">
                 <h3 className="font-bold">{item.name}</h3>
                 <p className="text-sm opacity-60">{item.color || "Standard"}</p>
                 <div className="mt-2 flex items-center gap-4">
-                  <div className="flex items-center border border-[var(--color-sf-border)] rounded-full px-2 py-1 bg-white/50">
+                  <div className="flex items-center border border-[var(--color-sf-border)] rounded-full px-2 py-1 bg-white/50 dark:bg-slate-800/50">
                     <button 
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
                       className="px-2 opacity-60 hover:opacity-100"
@@ -50,7 +50,7 @@ export default function CartPage() {
                 </div>
               </div>
               <div className="text-lg font-bold">
-                ${(item.price * item.quantity).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+                ₹{(item.price * item.quantity).toLocaleString('en-IN', { maximumFractionDigits: 0 })}
               </div>
             </GlassCard>
           ))}
@@ -62,7 +62,7 @@ export default function CartPage() {
             
             <div className="flex justify-between text-sm">
               <span className="opacity-70">Subtotal</span>
-              <span className="font-medium">${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              <span className="font-medium">₹{totalPrice.toLocaleString('en-IN', { maximumFractionDigits: 0 })}</span>
             </div>
             <div className="flex justify-between text-sm">
               <span className="opacity-70">Shipping</span>
@@ -73,7 +73,7 @@ export default function CartPage() {
             
             <div className="flex justify-between items-end">
               <span className="font-bold text-lg">Total</span>
-              <span className="text-2xl font-bold">${totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              <span className="text-2xl font-bold">₹{totalPrice.toLocaleString('en-IN', { maximumFractionDigits: 0 })}</span>
             </div>
 
             <Link href="/checkout" className="w-full mt-6 py-4 bg-[var(--color-sf-primary)] text-white text-center rounded-xl font-bold hover:scale-[1.02] active:scale-95 transition-all shadow-lg shadow-[var(--color-sf-primary)]/30 block">
