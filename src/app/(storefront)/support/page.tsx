@@ -18,6 +18,8 @@ interface Message {
   intent?: string;
   escalated?: boolean;
   ticketId?: string;
+  traceLog?: string[];
+  criticVerdict?: any;
 }
 
 export default function SupportChatPage() {
@@ -33,22 +35,24 @@ export default function SupportChatPage() {
   const [loading, setLoading] = useState(false);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [currentIntent, setCurrentIntent] = useState<string>('Support Ready');
+  const [expandedTraceId, setExpandedTraceId] = useState<string | null>(null);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom on new messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, loading]);
+  }, [messages, loading, expandedTraceId]);
 
-  const handleSend = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || loading) return;
+  const handleSend = async (e?: React.FormEvent, customInput?: string) => {
+    if (e) e.preventDefault();
+    const textToSend = customInput || input;
+    if (!textToSend.trim() || loading) return;
 
     const userMsg: Message = {
       id: Date.now().toString(),
       sender: 'user',
-      text: input.trim(),
+      text: textToSend.trim(),
     };
 
     setMessages((prev) => [...prev, userMsg]);
@@ -83,6 +87,8 @@ export default function SupportChatPage() {
         intent: data.intent,
         escalated: data.escalated || false,
         ticketId: data.ticketId,
+        traceLog: data.traceLog,
+        criticVerdict: data.criticVerdict,
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -109,6 +115,13 @@ export default function SupportChatPage() {
     if (intent.includes('POLICY') || intent.includes('FAQ')) return 'bg-purple-500/10 text-purple-400 border-purple-500/20';
     return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20';
   };
+
+  const quickReplies = [
+    "Where is order ORD-7734?",
+    "Can I return my AeroPhone Pro?",
+    "Is my NovaBook Pro X15 under warranty?",
+    "I want to speak to a human manager immediately."
+  ];
 
   return (
     <div className="flex flex-col h-[calc(100vh-80px)] max-w-4xl mx-auto p-4 md:p-6">
@@ -160,6 +173,61 @@ export default function SupportChatPage() {
                   ))}
                 </div>
               )}
+
+              {/* AI Trace Drawer Toggle */}
+              {msg.sender === 'bot' && msg.intent !== 'SUPPORT_GREETING' && (
+                <div className="mt-3 pt-2 border-t border-slate-800/50">
+                  <button 
+                    onClick={() => setExpandedTraceId(expandedTraceId === msg.id ? null : msg.id)}
+                    className="flex items-center space-x-1 text-[11px] font-mono text-slate-400 hover:text-emerald-400 transition-colors"
+                  >
+                    <span>⚡ View AI Trace</span>
+                    <span className="transform transition-transform" style={{ transform: expandedTraceId === msg.id ? 'rotate(180deg)' : 'none' }}>▼</span>
+                  </button>
+                  
+                  {/* Expanded Drawer */}
+                  {expandedTraceId === msg.id && (
+                    <div className="mt-3 p-3 bg-black/60 rounded-lg border border-slate-700 font-mono text-[10px] sm:text-xs overflow-hidden">
+                      <div className="mb-2">
+                        <span className="text-purple-400 font-bold">▶ ORCHESTRATOR</span>
+                        <div className="pl-3 mt-1 text-slate-300">
+                          Classified Intent: <span className="text-white bg-purple-500/20 px-1 rounded">{msg.intent || 'UNKNOWN'}</span>
+                        </div>
+                      </div>
+                      
+                      <div className="mb-2">
+                        <span className="text-blue-400 font-bold">▶ SUPPORT AGENT</span>
+                        <div className="pl-3 mt-1 text-slate-300 space-y-1">
+                          {msg.traceLog ? (
+                            msg.traceLog.filter((log) => log.includes('Support Agent')).map((log, idx) => (
+                              <div key={idx} className="break-all">{log.replace(/\[\d{2}:\d{2}:\d{2}\.\d{3}\] \[Support Agent\] /, '')}</div>
+                            ))
+                          ) : (
+                            <div>Generated response with standard toolkit</div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div>
+                        <span className="text-emerald-400 font-bold">▶ CRITIC AGENT</span>
+                        <div className="pl-3 mt-1 text-slate-300">
+                          {msg.criticVerdict ? (
+                            <>
+                              <div>Verification Verdict: <span className={msg.criticVerdict.verdict === 'pass' ? 'text-emerald-400 font-bold' : 'text-red-400 font-bold'}>{msg.criticVerdict.verdict.toUpperCase()}</span></div>
+                              <div>Confidence Score: {(msg.criticVerdict.confidence * 100).toFixed(0)}%</div>
+                              {msg.criticVerdict.claims_checked?.length > 0 && (
+                                <div className="mt-1 text-slate-500">{msg.criticVerdict.claims_checked.length} facts verified against KB</div>
+                              )}
+                            </>
+                          ) : (
+                            <span className="text-slate-500">No critic evaluation required</span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Escalation Floating Card */}
@@ -193,8 +261,23 @@ export default function SupportChatPage() {
         <div ref={messagesEndRef} />
       </div>
 
+      {/* Quick Replies (Only show when starting) */}
+      {messages.length === 1 && !loading && (
+        <div className="flex overflow-x-auto gap-2 pb-3 mb-2 scrollbar-hide">
+          {quickReplies.map((reply, i) => (
+            <button
+              key={i}
+              onClick={() => handleSend(undefined, reply)}
+              className="whitespace-nowrap px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium rounded-full border border-slate-700 transition-colors"
+            >
+              {reply}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Input Form */}
-      <form onSubmit={handleSend} className="flex space-x-2">
+      <form onSubmit={(e) => handleSend(e)} className="flex space-x-2">
         <input
           type="text"
           value={input}

@@ -740,3 +740,53 @@ export const categories = [
     gradient: "from-emerald-500 to-teal-600",
   },
 ];
+
+// --- KB POLICIES (15 policy snippets across 7 categories) ---
+export interface Policy {
+  id: string;
+  category: string;
+  title: string;
+  body: string;
+  version: number;
+}
+
+export const kbPolicies: Policy[] = [
+  // Returns & Refunds
+  { id: "RR-001", category: "Returns & Refunds", title: "Return Window", body: "Products can be returned within 7 days of delivery. The item must be unused, in its original packaging, with all accessories and tags intact. Digital products and opened software are non-returnable.", version: 2 },
+  { id: "RR-002", category: "Returns & Refunds", title: "Refund Processing", body: "Refunds are processed within 5-7 business days after we receive and inspect the returned item. The refund is credited to the original payment method. UPI refunds are typically faster (2-3 business days).", version: 2 },
+  { id: "RR-003", category: "Returns & Refunds", title: "Non-Returnable Items", body: "The following items cannot be returned: earbuds/headphones with broken hygiene seals, software licenses, gift cards, and items damaged by the customer. Items purchased during flash sales with 'No Return' tags are final sale.", version: 1 },
+
+  // Shipping & Delivery
+  { id: "SD-001", category: "Shipping & Delivery", title: "Delivery Timeline", body: "Standard shipping takes 3-7 business days depending on your location. Metro cities (Delhi, Mumbai, Bengaluru, Chennai, Hyderabad, Kolkata) typically receive orders within 3-4 business days. Remote areas may take up to 10 business days.", version: 3 },
+  { id: "SD-002", category: "Shipping & Delivery", title: "Free Shipping Policy", body: "Free shipping is available on all orders above ₹999. Orders below ₹999 incur a flat shipping fee of ₹99. Express shipping (1-2 business days) is available in select metros for an additional ₹299.", version: 2 },
+  { id: "SD-003", category: "Shipping & Delivery", title: "Shipping Partners", body: "We ship through BlueDart, Delhivery, and DTDC. Tracking information is shared via email and SMS once the order is dispatched. You can also track your order from the Account Dashboard.", version: 1 },
+
+  // Billing & Payments
+  { id: "BP-001", category: "Billing & Payments", title: "Accepted Payment Methods", body: "We accept UPI (Google Pay, PhonePe, Paytm), credit cards (Visa, Mastercard, Amex, RuPay), debit cards, net banking (all major banks), and EMI options on select cards. Cash on Delivery (COD) is available for orders up to ₹50,000.", version: 2 },
+  { id: "BP-002", category: "Billing & Payments", title: "EMI Options", body: "No-cost EMI is available on select products for 3, 6, and 9-month tenures on HDFC, ICICI, SBI, and Axis credit cards. Standard EMI with interest is available on all other supported cards. EMI processing fee may apply.", version: 1 },
+
+  // Warranty & Repairs
+  { id: "WR-001", category: "Warranty & Repairs", title: "Standard Warranty Coverage", body: "Laptops, Phones, and Smartwatches carry a 12-month manufacturer warranty from the date of purchase. Headphones carry a 6-month warranty. Warranty covers manufacturing defects and hardware failures under normal use.", version: 2 },
+  { id: "WR-002", category: "Warranty & Repairs", title: "Warranty Exclusions", body: "Warranty does not cover: physical damage (drops, water damage, screen cracks), damage from unauthorized modifications or repairs, normal wear and tear (battery degradation, cosmetic scratches), or accessories (chargers, cables, cases).", version: 2 },
+  { id: "WR-003", category: "Warranty & Repairs", title: "Warranty Claim Process", body: "To file a warranty claim: (1) Contact NexaBot with your order ID, (2) describe the issue, (3) NexaBot will verify your warranty status and create a claim ticket, (4) you'll receive a prepaid return label, (5) ship the item, (6) we inspect and repair/replace within 7-10 business days.", version: 3 },
+
+  // Replacement & Exchange
+  { id: "RE-001", category: "Replacement & Exchange", title: "Replacement Policy", body: "If you receive a defective or damaged product, you can request a replacement within 48 hours of delivery. Photo evidence of the defect/damage is required. Replacement is subject to stock availability — if unavailable, a full refund is processed.", version: 2 },
+  { id: "RE-002", category: "Replacement & Exchange", title: "Exchange Policy", body: "Product exchanges (e.g., different color or variant) are available within 7 days of delivery for select categories. The item must be unused and in original packaging. Price differences are adjusted via the original payment method.", version: 1 },
+
+  // Order Cancellation
+  { id: "OC-001", category: "Order Cancellation", title: "Cancellation Window", body: "Orders can be cancelled within 2 hours of placement or before the order status changes to 'Shipped', whichever comes first. Once an order is shipped, it cannot be cancelled — you may refuse delivery or initiate a return after delivery.", version: 2 },
+  { id: "OC-002", category: "Order Cancellation", title: "Cancellation Refund", body: "Cancelled orders are refunded within 3-5 business days to the original payment method. COD orders that are cancelled have no refund to process. Prepaid cancellations receive a full refund including any shipping charges paid.", version: 1 },
+
+  // Account & Security
+  { id: "AS-001", category: "Account & Security", title: "Account Security", body: "Your TechNova account is protected with industry-standard encryption. We recommend using a strong, unique password and enabling two-factor authentication (2FA) when available. Never share your login credentials or OTP with anyone.", version: 2 },
+  { id: "AS-002", category: "Account & Security", title: "Data Privacy", body: "We collect only the data necessary to process orders and provide support. Your personal information is never sold to third parties. You can request account data export or deletion by contacting support. Full privacy policy is available on our website.", version: 1 },
+];
+
+export function getPoliciesByCategory(category: string): Policy[] {
+  return kbPolicies.filter((p) => p.category === category);
+}
+
+export function getAllPolicyCategories(): string[] {
+  return [...new Set(kbPolicies.map((p) => p.category))];
+}
