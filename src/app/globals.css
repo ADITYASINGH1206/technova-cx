@@ -23,7 +23,7 @@
   /* ========================================================= */
   --color-admin-primary: #ffffff;
   --color-admin-secondary: #f1f5f9;
-  --color-admin-accent: #16a34a; /* Darker green for contrast */
+  --color-admin-accent: #16a34a;
   --color-admin-background: #f8fafc;
   --color-admin-foreground: #0f172a;
   --color-admin-muted: #e2e8f0;
@@ -43,7 +43,8 @@
 }
 
 .dark {
-  --color-sf-background: #020617; /* Very dark slate */
+  /* Storefront Dark */
+  --color-sf-background: #020617;
   --color-sf-foreground: #f8fafc;
   --color-sf-border: #334155;
   
